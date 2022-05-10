@@ -164,6 +164,8 @@ export default function App() {
 		console.log('Form Submitted', formData);
 	};
 
+	// go to next step
+
 	const handleNextStep = (newData, final = false) => {
 		setData((prev) => ({ ...prev, ...newData }));
 
