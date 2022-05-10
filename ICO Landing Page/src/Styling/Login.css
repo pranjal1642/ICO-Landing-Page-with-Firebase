@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+Form {
+	width: 100%;
+	padding: 60px;
+}
+.blo {
+	background-image: url('https://demo.artureanec.com/html/cryptoland/demo_3/img/mainBg.png');
+	background-position: bottom center;
+	background-repeat: no-repeat;
+	z-index: 2;
+}
+
+.login {
+	max-width: 500px;
+	width: 100%;
+	background: #f9fafb;
+	margin: 55px auto;
+	box-shadow: 10px 1px 14px rgb(17 0 34 / 19%);
+	padding: 20px;
+	border-radius: 10px;
+}
+.login .form-control {
+	background: white;
+	border: 0 none;
+	border-radius: 0.5rem;
+	box-sizing: border-box;
+	width: 100%;
+	margin: 0;
+	padding-bottom: 20px;
+	position: relative;
+}
+
+.container-fluid .login h1 {
+	text-align: center;
+	font-size: 45px;
+}
+.Toastify {
+	display: none;
+}
+.loginbutton h6 {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	margin-top: 1rem;
+}
+.loginbutton .btn {
+	display: flex;
+	justify-content: center;
+	color: #f9fafb;
+}
+
+/* .container-fluid {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-image: url('https://demo.artureanec.com/html/cryptoland/demo_3/img/mainBg.png');
+	background-position: bottom center;
+	background-repeat: no-repeat;
+	z-index: 2;
+} */
+.loginbutton .btn {
+	margin-top: 5px;
+	background-color: #8761a8;
+	text-align: center;
+}
