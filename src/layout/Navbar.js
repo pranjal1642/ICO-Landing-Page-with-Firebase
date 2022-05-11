@@ -4,77 +4,77 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
 	return (
 		<>
-			<header class="header sticky">
-				<a href="#" class="logo">
-					<div class="logo__img"></div>
-					<div class="logo__title">Cryptoland</div>
+			<header className="header sticky">
+				<a href="#" className="logo">
+					<div className="logo__img"></div>
+					<div className="logo__title">Cryptoland</div>
 				</a>
 
-				<ul class="menu">
-					<li class="menu__item">
-						<Link to={`/`} class="menu__link">
+				<ul className="menu">
+					<li className="menu__item">
+						<Link to={`/`} className="menu__link">
 							Home
 						</Link>
 					</li>
-					<li class="menu__item">
-						<a href="#about" class="menu__link">
+					<li className="menu__item">
+						<a href="#about" className="menu__link">
 							About
 						</a>
 					</li>
-					<li class="menu__item">
-						<a href="#services" class="menu__link">
+					<li className="menu__item">
+						<a href="#services" className="menu__link">
 							Services
 						</a>
 					</li>
-					<li class="menu__item">
-						<a href="#map" class="menu__link">
+					<li className="menu__item">
+						<a href="#map" className="menu__link">
 							Road Map
 						</a>
 					</li>
 
-					<li class="menu__item">
-						<a href="#team" class="menu__link">
+					<li className="menu__item">
+						<a href="#team" className="menu__link">
 							Team
 						</a>
 					</li>
 				</ul>
 
-				<div class="header__right">
-					<div class="select">
-						<select class="select select-hidden">
+				<div className="header__right">
+					<div className="select">
+						<select className="select select-hidden">
 							<option value="ru">ru</option>
 							<option value="ua">ua</option>
 							<option value="en">en</option>
 						</select>
-						<div class="select-styled">ru</div>
-						<ul class="select-options">
+						<div className="select-styled">ru</div>
+						<ul className="select-options">
 							<li rel="ru">ru</li>
 							<li rel="ua">ua</li>
 							<li rel="en">en</li>
 						</ul>
 					</div>
-					<div class="sign-in-wrap">
-						<Link to={`/login`} href="" class="btn-sign-in">
+					<div className="sign-in-wrap">
+						<Link to={`/login`} href="" className="btn-sign-in">
 							Sign in
 						</Link>
 					</div>
 				</div>
 
-				<div class="btn-menu">
-					<div class="one"></div>
-					<div class="two"></div>
-					<div class="three"></div>
+				<div className="btn-menu">
+					<div className="one"></div>
+					<div className="two"></div>
+					<div className="three"></div>
 				</div>
 			</header>
 
-			{/* <nav classNameName="navbar navbar-expand-lg mynav py-3 shadow-sm">
-				<div classNameName="container">
-					<div classNamename="logo">
-						<div className="logo__img"></div>
-						<div className="logo__title">Cryptoland</div>
+			{/* <nav classNameNameName="navbar navbar-expand-lg mynav py-3 shadow-sm">
+				<div classNameNameName="container">
+					<div classNameNamename="logo">
+						<div classNameName="logo__img"></div>
+						<div classNameName="logo__title">Cryptoland</div>
 					</div>
 					<button
-						classNameName="navbar-toggler"
+						classNameNameName="navbar-toggler"
 						type="button"
 						data-bs-toggle="collapse"
 						data-bs-target="#navbarSupportedContent"
@@ -82,53 +82,60 @@ const Navbar = () => {
 						aria-expanded="false"
 						aria-label="Toggle navigation"
 					>
-						<span classNameName="navbar-toggler-icon"></span>
+						<span classNameNameName="navbar-toggler-icon"></span>
 					</button>
-					<div classNameName="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul classNameName="navbar-nav mx-auto mb-2 mb-lg-0">
-							<li classNameName="nav-item">
-								<Link to={`/`} classNameName="nav-link active" aria-current="page">
+					<div
+						classNameNameName="collapse navbar-collapse"
+						id="navbarSupportedContent"
+					>
+						<ul classNameNameName="navbar-nav mx-auto mb-2 mb-lg-0">
+							<li classNameNameName="nav-item">
+								<Link
+									to={`/`}
+									classNameNameName="nav-link active"
+									aria-current="page"
+								>
 									Home
 								</Link>
 							</li>
 
-							<li classNameName="nav-item">
-								<a classNameName="nav-link" href="#">
+							<li classNameNameName="nav-item">
+								<a classNameNameName="nav-link" href="#">
 									About
 								</a>
 							</li>
-							<li classNameName="nav-item">
-								<a classNameName="nav-link" href="#">
+							<li classNameNameName="nav-item">
+								<a classNameNameName="nav-link" href="#">
 									Road Map
 								</a>
 							</li>
-							<li classNameName="nav-item">
-								<a classNameName="nav-link" href="#">
+							<li classNameNameName="nav-item">
+								<a classNameNameName="nav-link" href="#">
 									Staistics
 								</a>
 							</li>
-							<li classNameName="nav-item">
-								<a classNameName="nav-link" href="#">
+							<li classNameNameName="nav-item">
+								<a classNameNameName="nav-link" href="#">
 									Token
 								</a>
 							</li>
-							<li classNameName="nav-item">
-								<a classNameName="nav-link" href="#">
+							<li classNameNameName="nav-item">
+								<a classNameNameName="nav-link" href="#">
 									Team
 								</a>
 							</li>
 						</ul>
 						<>
-							<div classNameName="menu">
-								<Link to={`/signup`} classNameName="btn btn-outline-dark  ">
-									<i classNameName="fa fa-user-plus me-1">Signup</i>
+							<div classNameNameName="menu">
+								<Link to={`/signup`} classNameNameName="btn btn-outline-dark  ">
+									<i classNameNameName="fa fa-user-plus me-1">Signup</i>
 								</Link>
 								<Link
 									to={`/login`}
 									href=""
-									classNameName="btn btn-outline-dark ms-2"
+									classNameNameName="btn btn-outline-dark ms-2"
 								>
-									<i classNameName="fa fa-sign-in me-1">Login</i>
+									<i classNameNameName="fa fa-sign-in me-1">Login</i>
 								</Link>
 							</div>
 						</>

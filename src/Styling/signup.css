@@ -172,3 +172,8 @@
 .Toastify {
 	display: none;
 }
+
+.snapshot .addhar_Card {
+	height: 50%;
+	width: 50%;
+}

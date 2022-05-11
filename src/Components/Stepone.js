@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
@@ -6,7 +6,7 @@ const Stepone = (props) => {
 	const handleSubmit = (values) => {
 		props.next(values);
 	};
-
+	// const [image, setImage] = useState({blob: null, src: ''})
 	const validationSchema = Yup.object({
 		email: Yup.string().email('Invalid email format').required('Required'),
 		uname: Yup.string()

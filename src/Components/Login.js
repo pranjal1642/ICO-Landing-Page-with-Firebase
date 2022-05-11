@@ -62,7 +62,7 @@ const Login = () => {
 							<div className="login">
 								<h1>Login Form</h1>
 								<span className="fa fa-user"></span>
-								<label htmlfor="exampleInputEmail1">Email address</label>
+								<label htmlFor="exampleInputEmail1">Email address</label>
 
 								<Field
 									type="email"
@@ -73,7 +73,7 @@ const Login = () => {
 								<ErrorMessage name="email" />
 
 								<span className="fa fa-lock"></span>
-								<label htmlfor="exampleInputPassword1">Password</label>
+								<label htmlFor="exampleInputPassword1">Password</label>
 								<Field
 									type="password"
 									className="form-control"

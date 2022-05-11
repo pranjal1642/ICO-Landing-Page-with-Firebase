@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Styling/signup.css';
 
@@ -24,6 +24,7 @@ import Login from './Login';
 export default function App() {
 	const [isUploading, setIsUploading] = useState(false);
 	const [downloadUrl, setDownloadUrl] = useState(null);
+
 	const navigate = useNavigate();
 
 	const [data, setData] = useState({
@@ -45,12 +46,17 @@ export default function App() {
 
 	const Authentication = () => {
 		const authentication = getAuth();
-		{
+		try {
+			upload();
 			createUserWithEmailAndPassword(authentication, data.email, data.pwd).then(
-				(response) => {
+				async (response) => {
 					const uid = response.user.uid;
 					console.log(uid);
-					addData(uid);
+
+					const path = await upload();
+
+					addData(uid, path);
+
 					navigate('/login');
 
 					sessionStorage.setItem(
@@ -60,12 +66,14 @@ export default function App() {
 					return response.user.uid;
 				},
 			);
+		} catch {
+			console.log('Error in Uploading');
 		}
 	};
 
 	// Add data in  firebase  cloud firestore
 
-	const addData = async (uid) => {
+	const addData = async (uid, path) => {
 		try {
 			const docRef = await addDoc(collection(db, 'Users'), {
 				uname: data.uname,
@@ -76,7 +84,7 @@ export default function App() {
 				phno_2: data.phno_2,
 				date: data.date,
 				uid: uid,
-				image1: downloadUrl,
+				image1: path,
 			});
 			console.log('Document written with ID:', docRef.id);
 		} catch (e) {
@@ -85,74 +93,92 @@ export default function App() {
 	};
 
 	// To upload image to firebase and then set the the image link in the state of the app
-
+	const [image, setImage] = useState({
+		blob: null,
+		src: '',
+	});
 	const imagePicker = async (e) => {
 		// Upload image and set D-URL to state
+		const file = e.target.files[0];
 
-		try {
-			const file = e.target.files[0];
+		setImage({ blob: file, src: window.URL.createObjectURL(file) });
+	};
 
-			const metadata = {
-				contentType: file.type,
-			};
+	// useEffect(() => {
+	// 	alert(JSON.stringify(data));
+	// }, [data]);
 
-			const resizedImage = await readAndCompressImage(file, imageConfig);
+	const upload = () => {
+		return new Promise(async (resolve, reject) => {
+			try {
+				const metadata = {
+					contentType: 'images.jpg',
+				};
 
-			const storageRef = await firebase.storage().ref();
-			const uploadTask = storageRef
-				.child('image/' + file.name)
-				.put(resizedImage, metadata);
-			uploadTask.on(
-				'state_changed',
-				(snapshot) => {
-					setIsUploading(true);
-					const progress =
-						(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-					console.log('Upload is' + progress + ' % done');
+				const storageRef = await firebase.storage().ref();
+				const resizedImage = await readAndCompressImage(
+					image.blob,
+					imageConfig,
+				);
 
-					switch (snapshot.state) {
-						case 'paused':
+				const uploadTask = storageRef
+					.child('image/' + image.blob.name)
+					.put(resizedImage, metadata, image.blob);
+				uploadTask.on(
+					'state_changed',
+					(snapshot) => {
+						setIsUploading(true);
+						const progress =
+							(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+						console.log('Upload is' + progress + ' % done');
+
+						switch (snapshot.state) {
+							case 'paused':
+								setIsUploading(false);
+								console.log('UPloading is paused');
+								break;
+							case 'running':
+								console.log('UPloading is in progress...');
+								break;
+						}
+						if (progress == 100) {
 							setIsUploading(false);
-							console.log('UPloading is paused');
-							break;
-						case 'running':
-							console.log('UPloading is in progress...');
-							break;
-					}
-					if (progress == 100) {
-						setIsUploading(false);
-						console.log('uploaded', { type: 'success' });
-					}
-				},
-				(error) => {
-					switch (error.code) {
-						case 'storage/unauthorized':
-							// User doesn't have permission to access the object
-							break;
-						case 'storage/canceled':
-							// User canceled the upload
-							break;
+							console.log('uploaded', { type: 'success' });
+						}
+					},
+					(error) => {
+						switch (error.code) {
+							case 'storage/unauthorized':
+								// User doesn't have permission to access the object
+								break;
+							case 'storage/canceled':
+								// User canceled the upload
+								break;
 
-						// ...
+							// ...
 
-						case 'storage/unknown':
-							// Unknown error occurred, inspect error.serverResponse
-							break;
-					}
-				},
-				() => {
-					getDownloadURL(uploadTask.snapshot.ref)
-						.then((downloadURL) => {
-							console.log('File available at', downloadURL);
-							setDownloadUrl(downloadURL);
-						})
-						.catch((err) => console.log(err));
-				},
-			);
-		} catch (error) {
-			console.error(error);
-			toast('Something went wrong', { type: 'error' });
-		}
+							case 'storage/unknown':
+								// Unknown error occurred, inspect error.serverResponse
+								break;
+						}
+					},
+					() => {
+						getDownloadURL(uploadTask.snapshot.ref)
+							.then((downloadURL) => {
+								console.log('File available at', downloadURL);
+								setDownloadUrl(downloadURL);
+								resolve(downloadURL);
+								console.log(image);
+							})
+							.catch((err) => console.log(err));
+					},
+				);
+			} catch (error) {
+				console.error(error);
+				reject(error);
+				toast('Something went wrong', { type: 'error' });
+			}
+		});
 	};
 
 	const [currentStep, setCurrentStep] = useState(0);
@@ -160,6 +186,7 @@ export default function App() {
 	//  when all form data submitted then call authentication function
 	const makeRequest = (formData) => {
 		Authentication();
+		// upload();
 
 		console.log('Form Submitted', formData);
 	};
@@ -190,7 +217,7 @@ export default function App() {
 			prev={handlePrevStep}
 			data={data}
 			imagePicker={imagePicker}
-			downloadUrl={downloadUrl}
+			image={image.src}
 		/>,
 		<Stepfour next={handleNextStep} prev={handlePrevStep} data={data} />,
 	];

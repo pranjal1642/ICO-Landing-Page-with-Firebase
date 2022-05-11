@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import { Formik, Form, Field } from 'formik';
+
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+
 import '../Styling/signup.css';
 
 const Stepthree = (props) => {
@@ -7,8 +10,16 @@ const Stepthree = (props) => {
 		props.next(values);
 	};
 
+	// const schema = Yup.object().shape({
+	// 	image1: Yup.mixed().required('A file is required'),
+	// });
+
 	return (
-		<Formik initialValues={props.data} onSubmit={handleSubmit}>
+		<Formik
+			initialValues={props.data}
+			onSubmit={handleSubmit}
+			// validationSchema={schema}
+		>
 			{({ values }) => (
 				<div className="container-fluid ">
 					<div className="row justify-content-center mt-0">
@@ -37,21 +48,22 @@ const Stepthree = (props) => {
 													<h2 className="fs-title">Id proofs</h2>
 
 													<div>
-														<label htmlFor="imagepicker" className="">
+														<label htmlFor="imagepicker" className="snapshot">
 															<img
-																src={props.downloadUrl}
+																src={props.image}
 																alt="addhar card"
-																className="addhar Card"
+																className="addhar_Card"
 															/>
 														</label>
-														<Field
+														<input
 															type="file"
 															name="image1"
 															accept="image/*"
 															multiple={false}
-															onChange={(values) => props.imagePicker(values)}
+															onChange={(e) => props.imagePicker(e)}
 															className="hidden"
 														/>
+														{/* <ErrorMessage name="image1" /> */}
 													</div>
 												</div>
 												<Field
