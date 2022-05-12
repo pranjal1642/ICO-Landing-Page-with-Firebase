@@ -104,10 +104,6 @@ export default function App() {
 		setImage({ blob: file, src: window.URL.createObjectURL(file) });
 	};
 
-	// useEffect(() => {
-	// 	alert(JSON.stringify(data));
-	// }, [data]);
-
 	const upload = () => {
 		return new Promise(async (resolve, reject) => {
 			try {
